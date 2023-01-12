@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* NavBar */
+.body {
+  background: #eeeeee;
+}
+.headerContent {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar-logo {
+  font-size: 2rem;
+}
+.navbar > .container-fluid {
+  flex-direction: row-reverse;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/*Product Table*/
+.table {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.ifram {
+  max-height: 250px;
+  overflow-y: scroll;
+}
+.inStockRow {
+  background: rgb(76 175 80 / 58%) !important;
+}
+.notInStockRow {
+  background: #f443366e !important;
+}
+
+/*ActionPanel*/
+.reportsContainer {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  column-gap: 8px;
+  row-gap: 8px;
+  margin: 12px;
+}
+.ActionPanel {
+  width: 70%;
+  background-color: white;
+  margin: 0 auto;
+  height: 350px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 54px 55px,
+  rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+  rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.ActionPanelContent {
+  margin: 0 auto;
+  width: 95%;
+}
+.ActionBtnsContainer {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  column-gap: 8px;
+  margin: 12px;
 }
