@@ -63,8 +63,34 @@ const ProductState = (productState: boolean) => {
   );
 };
 
+export const DolarDia = () => {
+}
+
+
+
 export const ProductsTable = () => {
-  const data = React.useMemo((): ProductsOnTable[] => productsSeeds, []);
+  
+  const [DolarDia, setvalorDolarDia] = useState();
+  const [productos, setProductos] = useState([]);
+      useEffect(() => {
+
+        let fetchRes2 = fetch(
+          "http://localhost:9081/react-bodega-app/src/php/obtener_dolar_dia.php");
+          fetchRes2.then(res =>
+            res.json()).then(d => {
+              return setvalorDolarDia(d);
+            });
+            console.log(DolarDia);
+        
+        let fetchRes = fetch(
+          "http://localhost:9081/react-bodega-app/src/php/obtener_productos.php");
+          fetchRes.then(res =>
+            res.json()).then(d => {
+              return setProductos(d);
+            });
+          },[]);
+          
+  const data = React.useMemo((): ProductsOnTable[] => productos, []);
   const columns: Column<ProductsOnTable>[] = React.useMemo(
     () => [
       {
@@ -82,7 +108,7 @@ export const ProductsTable = () => {
       },
       {
         Header: "$",
-        accessor: "costoDolar",
+        accessor: "costodolar",
       },
       {
         Header: "Bs.",
@@ -101,28 +127,34 @@ export const ProductsTable = () => {
       },
       {
         Header: "%.$",
+        accessor: (row) => (row.ganancia * 100),
+        Cell: ({ value: precio }: { value: any }) => {
+          return <p className="text-start fw-bold">{precio}</p>;
+        },
       },
       {
         Header: "Dolar",
+        accessor: (row) => (row.ganancia * 100),
+        Cell: ({ value: precio }: { value: any }) => {
+          return <p className="text-start fw-bold">{precio}</p>;
+        },
       },
       {
         Header: "Total",
+        accessor: (row) => (row.ganancia * 100),
+        Cell: ({ value: precio }: { value: any }) => {
+          return <p className="text-start fw-bold">{precio}</p>;
+        },
       },
     ],
     []
   );
+
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data });
 
-  const [productos, setProductos] = useState();
 
-  useEffect(() => {
-    let productos = Listar_productos();
-    setProductos(Listar_productos());
-  },[]);
-  
-  console.log(productos);  
-  
 
   return (
     <Table
@@ -194,4 +226,5 @@ export const ProductsTable = () => {
       </tbody>
     </Table>
   );
+
 };

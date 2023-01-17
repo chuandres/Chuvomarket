@@ -1,7 +1,7 @@
 export type ProductsOnTable = {
     id: number,
     nombre: string,
-    costoDolar: number,
+    costodolar: number,
     precio: number,
     estado: number,
     ganancia: number,
