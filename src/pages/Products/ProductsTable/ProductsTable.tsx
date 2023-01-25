@@ -66,8 +66,6 @@ const ProductState = (productState: boolean) => {
 export const DolarDia = () => {
 }
 
-
-
 export const ProductsTable = () => {
   
   const [DolarDia, setvalorDolarDia] = useState();
@@ -80,7 +78,7 @@ export const ProductsTable = () => {
             res.json()).then(d => {
               return setvalorDolarDia(d);
             });
-            console.log(DolarDia);
+            console.log(productos);
         
         let fetchRes = fetch(
           "http://localhost:9081/react-bodega-app/src/php/obtener_productos.php");
@@ -90,7 +88,7 @@ export const ProductsTable = () => {
             });
           },[]);
           
-  const data = React.useMemo((): ProductsOnTable[] => productos, []);
+  const data = React.useMemo((): ProductsOnTable[] => productos, [productos]);
   const columns: Column<ProductsOnTable>[] = React.useMemo(
     () => [
       {

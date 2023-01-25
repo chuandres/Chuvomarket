@@ -1,16 +1,24 @@
-import React from "react";
+import Nav from "react-bootstrap/Nav";
+import React, { useState } from "react";
+import Modal from 'react-bootstrap/Modal';
+import { clock } from "../../helpers/Clock";
+import Button from 'react-bootstrap/Button';
+import Navbar from "react-bootstrap/Navbar";
+import { Products } from "../Products/Products";
 import { Link, Outlet } from "react-router-dom";
 import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import { clock } from "../../helpers/Clock";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { ProductsTable } from "../Products/ProductsTable/ProductsTable";
+import { Form } from "react-bootstrap";
 
 export const Layouts = () => {
+
   let clockDigit: string = clock();
   return (
     <>
+    {/* NAVBAR */}
+
       <Navbar bg="dark" variant="dark" expand={false} className="mb-3">
         <Container fluid>
           <div className="text-white fs-1">
@@ -62,7 +70,13 @@ export const Layouts = () => {
         </Container>
       </Navbar>
       <div id="detail">
+        <Products />
         <Outlet />
+      {/* TABLA PRODUCTOS */}
+      <Container fluid>
+        <h1 className="display-2 text-center py-2">Productos</h1>
+        <ProductsTable></ProductsTable>
+      </Container>
       </div>
     </>
   );
