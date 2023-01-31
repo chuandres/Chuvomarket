@@ -3,6 +3,7 @@ import { ProductsTable } from "./ProductsTable/ProductsTable";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
+import {Navigate} from 'react-router-dom';
 import {
   faMagnifyingGlass,
   faCartPlus,
@@ -20,11 +21,11 @@ export const Products = () => {
   const [state, setState] = useState(false);
 
   const [producto, setProducto] = useState({
-    nombre: "prueba3",
-    precio: "12",
-    costodolar: "2",
-    estado: false,
-    ganancia: "0.7",
+    nombre: "",
+    precio: "",
+    costodolar: "",
+    estado: 1,
+    ganancia: "",
     almacen: "SIN ASIGNAR",
   });
 
@@ -43,6 +44,8 @@ export const Products = () => {
         // console.log("ESTOY PASANDO", response.json());
         if(response.ok){
           setState(true);
+          handleClose();
+          return <Navigate to="/" />
         }
       });
   }
@@ -56,40 +59,48 @@ export const Products = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="controlInputNombre">
+            <Form.Group className="mb-3" controlId="nombre">
               <Form.Label>Nombre</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Nombre del producto"
                 autoFocus
+                onChange={handleChange}
+                name='nombre'
               />
             </Form.Group>
             <Form.Group
               className="mb-3"
-              controlId="controlInput2"
+              controlId="costodolar"
             >
               <Form.Label>Valor del Dolar Hoy:</Form.Label>
               <Form.Control
                 type="text"
                 placeholder=".."
                 autoFocus
+                onChange={handleChange}
+                name='costodolar'
               />
               {/* <Form.Control as="textarea" rows={3} /> */}
             </Form.Group>
-            <Form.Group className="mb-3" controlId="controlInputPrecio">
+            <Form.Group className="mb-3" controlId="precio">
               <Form.Label>Precio del Producto en Bs</Form.Label>
               <Form.Control
                 type="text"
                 placeholder=".."
                 autoFocus
+                onChange={handleChange}
+                name='precio'
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="controlInputGanancia">
+            <Form.Group className="mb-3" controlId="ganancia">
               <Form.Label>Ganancia del producto</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="%"
                 autoFocus
+                onChange={handleChange}
+                name='ganancia'
               />
             </Form.Group>
           </Form>
@@ -98,7 +109,7 @@ export const Products = () => {
           <Button variant="secondary" onClick={handleClose}>
             Cerrar
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Agregar Producto
           </Button>
         </Modal.Footer>

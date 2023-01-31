@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { ProductsOnTable } from "../../../types/Products/productsOnTable";
 import { Listar_productos } from "../../../services/productos/listar_productos";
+import { Link } from "react-router-dom";
 import {
   faPowerOff,
   faPenToSquare,
@@ -21,15 +22,19 @@ const ProductOperation = (inStock: boolean, id: number) => {
       <Button variant="danger">
         <FontAwesomeIcon icon={faPowerOff} />
       </Button>{" "}
-      <Button variant="danger">
+      
+      {/* <Link to={`/productos/editar/${producto.id}`} className="button is-danger">
+        <FontAwesomeIcon icon={faTrash} />
+      </Link> */}
+      {/* <Link to={`/productos/eliminar/${props.producto.id}`} className="button is-danger">Eliminar</Link> */}
+      
+      <Button variant="danger"  onClick={handleDelete}>
         <FontAwesomeIcon icon={faTrash} />
       </Button>{" "}
       <Button variant="primary">
         <FontAwesomeIcon icon={faPenToSquare} />
       </Button>{" "}
-      <Button variant="primary">
-        <FontAwesomeIcon icon={faRetweet} />
-      </Button>{" "}
+
     </>
   );
   const isNotInStock = (
@@ -63,8 +68,10 @@ const ProductState = (productState: boolean) => {
   );
 };
 
-export const DolarDia = () => {
-}
+function handleDelete(e:any) {
+  const { name, value } = e.target;
+  // setProducto({...producto, [name]: value});
+};
 
 export const ProductsTable = () => {
   
