@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
 import { Table } from "react-bootstrap";
 import { Column, useTable } from "react-table";
-import { productsSeeds } from "../../../helpers/productsSeeds";
+// import { productsSeeds } from "../../../helpers/productsSeeds";
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { ProductsOnTable } from "../../../types/Products/productsOnTable";
 import { Listar_productos } from "../../../services/productos/listar_productos";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   faPowerOff,
   faPenToSquare,
@@ -28,9 +28,7 @@ const ProductOperation = (inStock: boolean, id: number) => {
       </Link> */}
       {/* <Link to={`/productos/eliminar/${props.producto.id}`} className="button is-danger">Eliminar</Link> */}
       
-      <Button variant="danger"  onClick={handleDelete}>
-        <FontAwesomeIcon icon={faTrash} />
-      </Button>{" "}
+
       <Button variant="primary">
         <FontAwesomeIcon icon={faPenToSquare} />
       </Button>{" "}
@@ -42,12 +40,10 @@ const ProductOperation = (inStock: boolean, id: number) => {
       <Button variant="success">
         <FontAwesomeIcon icon={faPowerOff} />
       </Button>{" "}
-      <Button variant="danger">
-        <FontAwesomeIcon icon={faTrash} />
-      </Button>{" "}
-      <Button variant="primary">
+
+      {/* <Button variant="primary">
         <FontAwesomeIcon icon={faPenToSquare} />
-      </Button>{" "}
+      </Button>{" "} */}
       <Button variant="primary">
         <FontAwesomeIcon icon={faRetweet} />
       </Button>{" "}
@@ -68,33 +64,43 @@ const ProductState = (productState: boolean) => {
   );
 };
 
-function handleDelete(e:any) {
-  const { name, value } = e.target;
-  // setProducto({...producto, [name]: value});
-};
+
 
 export const ProductsTable = () => {
+
+  
+  const HandleDelete = (e:any) => {
+
+    setProductos(productos.filter(producto => producto.id !== e.target.value));
+    // fetch(`http://localhost:80/react-bodega-app/src/php/eliminar_producto.php?id=${e.target.value}`)
+    // .then((response) => { 
+    //   if(response.ok){
+    //   }
+    //   throw response;
+    // })
+    
+  };
   
   const [DolarDia, setvalorDolarDia] = useState();
-  const [productos, setProductos] = useState([]);
+  const [productos, setProductos] = useState<ProductsOnTable[]>([]);
+  
       useEffect(() => {
 
         let fetchRes2 = fetch(
-          "http://localhost:9081/react-bodega-app/src/php/obtener_dolar_dia.php");
+          "http://localhost:80/react-bodega-app/src/php/obtener_dolar_dia.php");
           fetchRes2.then(res =>
             res.json()).then(d => {
               return setvalorDolarDia(d);
             });
-            console.log(productos);
         
         let fetchRes = fetch(
-          "http://localhost:9081/react-bodega-app/src/php/obtener_productos.php");
+          "http://localhost:80/react-bodega-app/src/php/obtener_productos.php");
           fetchRes.then(res =>
             res.json()).then(d => {
               return setProductos(d);
+              
             });
           },[]);
-          
   const data = React.useMemo((): ProductsOnTable[] => productos, [productos]);
   const columns: Column<ProductsOnTable>[] = React.useMemo(
     () => [
@@ -106,7 +112,10 @@ export const ProductsTable = () => {
               {ProductOperation(
                 props.row.original.estado,
                 props.row.original.id
-              )}
+                )}
+                <Button variant="danger" value={props.row.original.id} onClick={HandleDelete}>
+                 Borrar
+                </Button>{" "}
             </>
           );
         },

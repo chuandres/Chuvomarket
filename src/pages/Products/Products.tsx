@@ -37,7 +37,7 @@ export const Products = () => {
   function handleSubmit(e:any) {
     e.preventDefault();
     const datosJSON = JSON.stringify(producto);
-    const exitoso = fetch(`http://localhost:9081/react-bodega-app/src/php/agregar_producto.php`, {
+    const exitoso = fetch(`http://localhost:80/react-bodega-app/src/php/agregar_producto.php`, {
         method: "POST",
         body: datosJSON,
       }).then((response) => {

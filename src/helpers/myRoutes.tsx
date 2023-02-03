@@ -5,7 +5,7 @@ import { Layouts } from "../pages/Layouts/Layouts";
 import { Products } from "../pages/Products/Products";
 import { Tickets } from "../pages/Tickets/Tickets";
 import { AddProduct } from "../pages/addProduct/addProduct";
-
+import { DeleteProduct } from "../pages/deleteProduct/deleteProduct";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -19,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/products/eliminar/:id",
+        element: <DeleteProduct />,
       },
       {
         path: "/tickets",
